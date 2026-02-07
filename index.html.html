@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connys Pferdewelt | Professionelles Rehatraining</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --magenta: #E6007E;
+            --navy: #0A192F;
+            --cream: #FAF9F6;
+            --white: #ffffff;
+            --text: #1A1A1A;
+            --transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* --- MODERN REVEAL ANIMATION --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--cream); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.7; overflow-x: hidden; }
+
+        /* --- Global Elements --- */
+        .section { padding: 100px 8%; position: relative; }
+        .bg-white { background: var(--white); }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--navy); line-height: 1.2; }
+        h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        .magenta-tag { color: var(--magenta); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        ul { list-style: none; }
+        .bullet-list li { position: relative; padding-left: 25px; margin-bottom: 10px; }
+        .bullet-list li::before { content: '•'; position: absolute; left: 0; color: var(--magenta); font-weight: bold; }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .logo-nav { height: 65px; border-radius: 12px; mix-blend-mode: multiply; z-index: 1001; }
+        
+        .nav-links a { text-decoration: none; color: var(--navy); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-left: 20px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--magenta); }
+
+        /* --- Hamburger Menu --- */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 10px;
+        }
+        .hamburger .line {
+            width: 25px;
+            height: 2px;
+            background-color: var(--navy);
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        /* --- 1. Hero Section --- */
+        .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding-top: 80px; overflow: hidden; }
+        .hero-content { padding: 0 10%; z-index: 2; }
+        .hero-image { 
+            height: 100%; width: 100%; 
+            background: url('https://i.imgur.com/3JGjT6Y.jpg') center/cover no-repeat;
+            box-shadow: inset 180px 0 120px -50px var(--cream); 
+        }
+        .hero h1 { font-size: clamp(2.2rem, 4vw, 3.8rem); margin-bottom: 1.5rem; }
+        .hero h1 span { color: var(--magenta); display: block; font-style: italic; }
+        .hero-subtext { font-style: italic; font-size: 1.1rem; color: #4A5568; border-left: 3px solid var(--magenta); padding-left: 20px; }
+
+        /* --- 2. Training & Prävention Section --- */
+        .intro-section { text-align: center; max-width: 900px; margin: 0 auto; }
+        .intro-section p { margin-bottom: 25px; font-size: 1.1rem; }
+        .btn-cta { 
+            display: inline-block; background: var(--magenta); color: white; padding: 20px 40px; 
+            text-decoration: none; border-radius: 50px; font-weight: 700; text-transform: uppercase; 
+            letter-spacing: 1px; transition: 0.3s; box-shadow: 0 10px 20px rgba(230, 0, 126, 0.2);
+        }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(230, 0, 126, 0.3); background: var(--navy); }
+
+        /* --- 3. Hallo ich bin Conny --- */
+        .about-grid-system { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+        .about-full-width { grid-column: 1 / -1; margin-bottom: 30px; }
+        .about-portrait { width: 100%; border-radius: 24px; box-shadow: 20px 20px 0px var(--white); margin-bottom: 20px; object-fit: cover; }
+        .quote-box { 
+            background: var(--navy); color: white; padding: 40px; border-radius: 24px; 
+            font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.5rem); font-style: italic;
+            margin: 30px 0; border-left: 10px solid var(--magenta);
+        }
+        .anspruch-list { background: #f0f0f0; padding: 40px; border-radius: 24px; }
+
+        /* --- 4. Leistungen Grid --- */
+        .leistungen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        .leistung-card { background: var(--white); padding: 40px; border-radius: 20px; border: 1px solid rgba(0,0,0,0.05); transition: 0.3s; }
+        .leistung-card:hover { border-color: var(--magenta); transform: translateY(-5px); }
+        .leistung-card h4 { font-size: 1.4rem; margin-bottom: 15px; color: var(--magenta); }
+
+        /* --- Mobility Box --- */
+        .mobility-highlight { 
+            background: var(--navy); color: white; padding: 50px; border-radius: 30px; margin-top: 60px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+        }
+
+        /* --- 5. Content Block --- */
+        .content-block { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 120px; }
+        .content-block.reverse { direction: rtl; }
+        .content-block.reverse .text-side { direction: ltr; }
+        .image-side img { width: 100%; border-radius: 24px; box-shadow: 30px 30px 0px rgba(230, 0, 126, 0.03); }
+        .image-side.dual-img { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+        /* --- Contact --- */
+        .contact-socials { display: flex; justify-content: center; gap: 30px; margin-top: 30px; font-size: clamp(2rem, 5vw, 2.5rem); }
+        .contact-socials a { color: var(--navy); transition: 0.3s; }
+        .contact-socials a:hover { color: var(--magenta); transform: scale(1.1); }
+
+        /* --- FOOTER --- */
+        footer { background: var(--navy); color: rgba(255,255,255,0.85); padding: 80px 8% 40px; }
+        .footer-grid { 
+            display: grid; 
+            grid-template-columns: 1.2fr 1fr 1.2fr; 
+            gap: 60px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 60px;
+        }
+        .footer-logo { height: 75px; border-radius: 12px; background: white; padding: 8px; margin-bottom: 25px; }
+        .footer-title { color: var(--magenta); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 25px; display: block; }
+        
+        .footer-list { list-style: none; }
+        .footer-list li { margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: baseline; }
+        .footer-list li i { color: var(--magenta); margin-right: 12px; font-size: 0.8rem; }
+        
+        .edu-item { margin-bottom: 20px; position: relative; padding-left: 20px; border-left: 1px solid rgba(230, 0, 126, 0.4); }
+        .edu-year { display: block; color: var(--magenta); font-weight: 700; font-size: 0.85rem; margin-bottom: 2px; }
+        .edu-text { font-size: 0.95rem; line-height: 1.4; }
+
+        .footer-info-box { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; margin-top: 20px; }
+        .footer-info-box p { font-size: 0.9rem; margin-bottom: 10px; font-style: italic; }
+
+        /* --- RESPONSIVENESS OVERHAUL --- */
+        @media (max-width: 1024px) {
+            .hamburger { display: block; }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--white);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transition);
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                margin: 20px 0;
+                font-size: 1.5rem;
+            }
+
+            /* Hamburger to X Animation */
+            .hamburger.active .line:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .hamburger.active .line:nth-child(2) { opacity: 0; }
+            .hamburger.active .line:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+            .hero, .about-grid-system, .content-block, .mobility-highlight, .footer-grid { grid-template-columns: 1fr; }
+            .hero-image { height: 45vh; order: -1; box-shadow: none; }
+            .hero { height: auto; padding-bottom: 60px; }
+            .hero-content { padding: 40px 5%; }
+            .section { padding: 60px 5%; }
+            .content-block { gap: 40px; margin-bottom: 80px; }
+            .footer-grid { gap: 40px; }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem !important; }
+            .logo-nav { height: 50px; }
+            .btn-cta { width: 100%; text-align: center; }
+            .mobility-highlight, .anspruch-list { padding: 30px 20px; }
+            .image-side img { box-shadow: 15px 15px 0px rgba(230, 0, 126, 0.03); }
+            #kontakt h2 { font-size: clamp(2.5rem, 10vw, 5rem) !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <img src="https://i.imgur.com/ybovbhF.jpeg" alt="Logo" class="logo-nav">
+        
+        <!-- Hamburger Icon -->
+        <div class="hamburger" id="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+
+        <div class="nav-links" id="nav-links">
+            <a href="#über-mich">Über mich</a>
+            <a href="#leistungen">Leistungen</a>
+            <a href="#angebote">Angebote</a>
+            <a href="#kontakt" style="color: var(--magenta)">Kontakt</a>
+        </div>
+    </nav>
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero reveal">
+        <div class="hero-content">
+            <span class="magenta-tag">Willkommen</span>
+            <h1>Gesunde Bewegung beginnt <span>Mit Verständnis & Kommunikation</span></h1>
+            <p class="hero-subtext">
+                Individuelles, auf dein Pferd abgestimmtes Rehatraining nach Katrin Obst, Geitnertraining & moderne Bewegungsanalyse, unterstützend mit dem Consteed System - the smart horse sneaker.
+            </p>
+        </div>
+        <div class="hero-image"></div>
+    </section>
+
+    <!-- 2. TRAINING & PRÄVENTION SECTION -->
+    <section class="section reveal">
+        <div class="container intro-section">
+            <span class="magenta-tag">Training & Prävention</span>
+            <h2>Rehatraining nach Katrin Obst, Geitnertraining, Consteed – the smart horse sneaker</h2>
+            <p>Ich unterstütze Pferde nach Verletzungen, bei Bewegungseinschränkungen oder zur langfristigen Gesunderhaltung – mit gezieltem Rehatraining, dem bewährtem Geitnertraining und als einzige Anbieterin in Österreich mit dem Consteed – the smart horse sneaker zur objektiven Bewegungsanalyse.</p>
+            <p><b>Ganzheitliches Rehatraining & Bewegungsanalyse mittels Consteed – the smart horse sneaker</b></p>
+            <p>Mobil in Niederösterreich, Steiermark, Wien & Burgenland<br>Einzeltrainings – Gruppentrainings – Kurse und Workshops</p>
+            <a href="mailto:conny.bluemert@aon.at" class="btn-cta">jetzt Termin anfragen</a>
+        </div>
+    </section>
+
+    <!-- 3. HALLO ICH BIN CONNY -->
+    <section id="über-mich" class="section bg-white reveal">
+        <div class="container">
+            <span class="magenta-tag">Storytelling</span>
+            <h2 style="margin-bottom: 40px;">Hallo, ich bin Conny!</h2>
+            
+            <div class="about-grid-system">
+                <div class="about-text-column">
+                    <img src="https://i.imgur.com/ANYYqqp.png" alt="Conny Portrait High Res" class="about-portrait">
+                    <p>Ich reite seit ich ein kleines Kind bin und hatte in dieser Zeit mehrere Reitbeteiligungen. 2008 trat dann dieses besondere Pferd, Piccolino, in mein Leben und es begleitet mich bis heute auf meinem Weg.</p>
+                    <p>Ich habe mich nie wirklich mit dem Thema „Körper des Pferdes, seine Funktionsweise oder Bodenarbeit“ beschäftigt. Ich denke auch, dass diese Denkweise vor vielen Jahren noch sehr belächelt wurde. Seit 2020 ist Piccolino nun offiziell ein Teil unserer Familie, seit diesem Tag habe ich nun auch die Möglichkeit mich mit mehr als „nur“ reiten zu befassen.</p>
+                </div>
+                
+                <div class="about-text-column">
+                    <p>Aufgrund ständiger Lahmheiten meines Pferdes bin ich über Umwege zu blau-gelb gelangt und seither mehr als begeistert von diesem Training. Dieses bietet eine Vielzahl von Möglichkeiten sein Pferd in eine korrekte Balance zu bringen oder es nach einer Verletzung wieder aufzubauen.</p>
+                    <p><b>2023</b> habe ich in Deutschland meine Ausbildung zum lizenzierten Geitnertrainer bei Mike Geitner absolviert. <b>2024</b> auf einer Trainerfortbildung in Deutschland durfte ich dann Katrin Obst persönlich kennenlernen und war sofort begeistert von ihrem Wissen und ihrer fröhlichen Art mit der sie gerne ihr Wissen an andere weitergibt.</p>
+                    <p><b>2025</b> entschloss ich mich dann nach Deutschland zu fliegen zur Rehatrainerausbildung nach Katrin Obst. Diese Ausbildung kostete mir vorab schon sehr viele Nerven, da fliegen nicht zu meiner liebsten Fortbewegungsart zählt und ich außerdem noch nie alleine geflogen bin. Ich habe es jedoch nie bereut das Ganze auf mich genommen zu haben.</p>
+                </div>
+
+                <div class="about-full-width">
+                    <div class="quote-box reveal">
+                        „In Österreich gibt es noch keine Rehatrainer für Pferde, ein weiterer Ansporn für mich diese Sparte in mein Heimatland zu holen. Warum sollen wir den Pferden nicht das gönnen, was für uns Menschen nach Operationen (Physio, Yoga) selbstverständlich ist?“
+                    </div>
+                </div>
+
+                <div class="about-text-column">
+                    <p>Rehatraining bedeutet jedoch nicht nur die Arbeit mit Pferde nach Verletzungen oder Operationen, sondern auch Prävention und Gesunderhaltung. Im August 2025 durfte ich dann als erste und einzige Österreicherin das <b>Consteed system – the smart horse sneaker</b> bei meinen Kunden anwenden. Dieses ist seither ein fester Bestandteil meiner Arbeit.</p>
+                    <p>In Kürze geht es wieder nach Deutschland um die <b>Hornmethode</b> (auch diese gibt es nicht in Österreich) zu erlernen. Hierbei handelt es sich um eine eigens entwickelte Methode für Faszienrelease und Entspannung bei Pferd und Hund.</p>
+                    <p>Ebenso folgt heuer noch eine Fortbildung zum Rehatrainer 2.0, sowie das Zertifikat für das Consteed System.</p>
+                </div>
+
+                <div class="about-text-column">
+                    <div class="anspruch-list">
+                        <h4 style="margin-bottom: 20px;">Mein Anspruch:</h4>
+                        <ul class="bullet-list">
+                            <li>pferdegerecht & nachhaltig</li>
+                            <li>Verständlich und nachvollziehbar für den Besitzer</li>
+                            <li>ohne Druck, mit Gefühl für Feinheiten</li>
+                            <li>in Zusammenarbeit mit dem Pferd</li>
+                            <li>mit einem offenen Ohr für das Befinden des Pferdes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="about-full-width reveal" style="text-align: center; margin-top: 40px;">
+                    <p style="font-size: 1.3rem; font-weight: 600; color: var(--magenta);">
+                        Pferdegesundheit bedeutet für mich: hinzusehen, zuzuhören und individuell in Zusammenarbeit mit dem Pferd zu arbeiten. Jedes Pferd ist einzigartig – genauso gestalte ich mein Training.
+                    </p>
+                    <p style="margin-top: 20px; font-style: italic; opacity: 0.7;">
+                        "Stillstand ist Rückschritt! Aufhören des Strebens ist geistiger Tod!" (Konfuzius)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. LEISTUNGEN -->
+    <section id="leistungen" class="section reveal">
+        <div class="container">
+            <span class="magenta-tag">Fokus</span>
+            <h2>Leistungen</h2>
+            <div class="leistungen-grid">
+                <div class="leistung-card">
+                    <h4>Rehatraining</h4>
+                    <p>Nach Katrin Obst – individuell, schonend, nachhaltig.</p>
+                </div>
+                <div class="leistung-card">
+                    <h4>Geitnertraining</h4>
+                    <p>Blau-Gelbes Training für Balance und Koordination.</p>
+                </div>
+                <div class="leistung-card">
+                    <h4>Bewegungsanalyse</h4>
+                    <p>Mittels Consteed – für objektive Daten in Echtzeit.</p>
+                </div>
+                <div class="leistung-card">
+                    <h4>Hornmethode</h4>
+                    <p>Faszienrelease und Entspannung (In Arbeit).</p>
+                </div>
+            </div>
+
+            <div class="mobility-highlight reveal">
+                <div>
+                    <h4 style="color: var(--magenta); margin-bottom: 20px;">Ich arbeite mobil in:</h4>
+                    <ul class="bullet-list">
+                        <li>Niederösterreich</li>
+                        <li>Wien</li>
+                        <li>Burgenland</li>
+                        <li>Steiermark</li>
+                    </ul>
+                </div>
+                <div>
+                    <p style="font-size: 1.2rem; font-weight: 700; margin-bottom: 15px;">Trainings direkt vor Ort – stressfrei für Pferd und Besitzer.</p>
+                    <p>Das Equipment wird von mir mitgebracht; keine Vorkenntnisse nötig.</p>
+                    <p style="margin-top: 15px; opacity: 0.8;">Ziel ist eine stabile, tragfähige und gesunde Bewegung, die schonend aufgebaut wird und langfristig erhalten bleiben soll.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEEP DIVES -->
+    <section class="section bg-white">
+        <div class="container content-block reveal">
+            <div class="image-side"><img src="https://i.imgur.com/2N3UMS4.jpeg" alt="Analyse"></div>
+            <div class="text-side">
+                <span class="magenta-tag">Schritt 1</span>
+                <h3>Analyse</h3>
+                <p>Gezielte Beobachtung der Bewegungsabläufe als Basis für den Trainingsplan. Als Grundstein wird zu Beginn der gesamte Pferdekörper im Stand und in Bewegung betrachtet.</p>
+            </div>
+        </div>
+
+        <div class="container content-block reverse reveal">
+            <div class="image-side dual-img">
+                <img src="https://i.imgur.com/IOxC8Oi.jpeg" alt="Consteed 1">
+                <img src="https://i.imgur.com/VV3xJE8.jpeg" alt="Consteed 2">
+            </div>
+            <div class="text-side">
+                <span class="magenta-tag">Echtzeit-Daten</span>
+                <h3>Consteed System</h3>
+                <p><b>Was wird gemessen?</b> Druckerteilung im Huf, Position im Raum, Belastung, Asymmetrien und Körperbalance.</p>
+                <p><b>Warum so wertvoll?</b> Objektive Daten statt Bauchgefühl, sofort ablesbar per App, perfekte Entscheidungsgrundlage für Hufbearbeitung und Training.</p>
+            </div>
+        </div>
+
+        <div class="container content-block reveal">
+            <div class="image-side dual-img">
+                <img src="https://i.imgur.com/aLVb3ZY.jpeg" alt="Reha 1">
+                <img src="https://i.imgur.com/XXS8yI8.jpeg" alt="Reha 2">
+            </div>
+            <div class="text-side">
+                <span class="magenta-tag">Regeneration</span>
+                <h3>Rehatraining nach Katrin Obst</h3>
+                <p>Unterstützung des Wiederaufbaus nach Verletzungen oder OP. Präventiv wertvoll zur Steigerung des Wohlbefindens.</p>
+                <p><b>Komponenten:</b> Isometrische Übungen, Massagetechniken, Kinesiotapes, Faszientraining, Narbenbehandlung, Blutegel uvm.</p>
+            </div>
+        </div>
+
+        <div class="container content-block reverse reveal">
+            <div class="image-side"><img src="https://i.imgur.com/FnLjDvV.jpeg" alt="Blau-Gelb"></div>
+            <div class="text-side">
+                <span class="magenta-tag">Neuro-Training</span>
+                <h3>Das Prinzip Blau-Gelb</h3>
+                <p>Nutzt die dichromatische Farbwahrnehmung der Pferde zur Optimierung der Gehirnhälften-Kommunikation. <b>Equikinetic®</b> sorgt für Muskelaufbau, <b>Dualaktivierung®</b> für Konzentration und Balance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANGEBOTE SECTION -->
+    <section id="angebote" class="section reveal">
+        <div class="container">
+            <span class="magenta-tag">Zusammenarbeit</span>
+            <h2>Trainingsformen & Kurse</h2>
+            <div class="leistungen-grid">
+                <div class="leistung-card">
+                    <h4>Einzeltraining</h4>
+                    <p>Individuelle Betreuung. Optimal für Reha und Trainingsaufbau.</p>
+                </div>
+                <div class="leistung-card">
+                    <h4>Gruppentraining</h4>
+                    <p>Gemeinsames Lernen in Time Slots. Effizient und motivierend.</p>
+                </div>
+            </div>
+            <img src="https://i.imgur.com/NDODxvy.png" alt="Trainingsszene" style="width: 100%; border-radius: 24px; margin-top: 40px; height: 400px; object-fit: cover;">
+            
+            <div class="about-grid-system" style="margin-top: 60px;">
+                <div class="anspruch-list" style="background: var(--white);">
+                    <h4>Kurse & Workshops</h4>
+                    <ul class="bullet-list">
+                        <li>Rehatraining & Boxenruhe</li>
+                        <li>Geitnertraining (Anfänger & Fortgeschrittene)</li>
+                        <li>Taping & Wellness für Pferde</li>
+                        <li>Tages- & 2-Tageskurse mit Theorieteil</li>
+                    </ul>
+                </div>
+                <div>
+                    <p><b>Termine nach Vereinbarung:</b> Trainings direkt vor Ort – stressfrei für Pferd und Besitzer. Equipment wird gestellt.</p>
+                    <a href="mailto:conny.bluemert@aon.at" class="btn-cta">Jetzt Termin anfragen</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="kontakt" class="section text-center reveal">
+        <div class="container">
+            <span class="magenta-tag">Let's talk</span>
+            <h2 style="margin-bottom: 40px;">Bereit für Veränderung?</h2>
+            
+            <div style="margin: 50px 0;">
+                <a href="tel:06644236141" style="font-size: clamp(1.5rem, 8vw, 2.8rem); color: var(--navy); text-decoration: none; font-weight: 800; display: block; margin-bottom: 10px;">0664 / 423 61 41</a>
+                <a href="mailto:conny.bluemert@aon.at" style="font-size: clamp(1.1rem, 5vw, 1.8rem); color: var(--magenta); text-decoration: none; word-break: break-all;">conny.bluemert@aon.at</a>
+            </div>
+            
+            <div class="contact-socials">
+                <a href="https://www.instagram.com/connys.pferdewelt/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/connys.pferdewelt/" target="_blank"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <!-- Col 1: Brand & Region -->
+            <div>
+                <img src="https://i.imgur.com/ybovbhF.jpeg" alt="Logo" class="footer-logo">
+                <span class="footer-title">Einsatzgebiet</span>
+                <p style="margin-bottom: 20px; font-size: 0.95rem;">Ich arbeite mobil und komme direkt zu dir in den Stall für ein stressfreies Training.</p>
+                <ul class="footer-list">
+                    <li><i class="fas fa-map-marker-alt"></i> Niederösterreich</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Wien</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Burgenland</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Steiermark</li>
+                </ul>
+            </div>
+
+            <!-- Col 2: Ausbildungen -->
+            <div>
+                <span class="footer-title">Ausbildungen</span>
+                <div class="edu-item">
+                    <span class="edu-year">2023</span>
+                    <span class="edu-text">Lizenzierte Geitnertrainerin</span>
+                </div>
+                <div class="edu-item">
+                    <span class="edu-year">2024</span>
+                    <span class="edu-text">Fortbildung für Geitnertrainer mit Katrin Obst</span>
+                </div>
+                <div class="edu-item">
+                    <span class="edu-year">2025</span>
+                    <span class="edu-text">Rehatrainerausbildung nach Katrin Obst</span>
+                </div>
+                <div class="edu-item">
+                    <span class="edu-year">2026 progress</span>
+                    <span class="edu-text">Practitioner Hornmethode (Faszienrelease & – entspannung)</span>
+                </div>
+                <div class="edu-item" style="border: none;">
+                    <span class="edu-year">In Kürze</span>
+                    <span class="edu-text">Zertifikat Consteed System</span>
+                </div>
+            </div>
+
+            <!-- Col 3: Zusatzqualifikationen & Info -->
+            <div>
+                <span class="footer-title">Expertise & Qualifikationen</span>
+                <ul class="footer-list" style="margin-bottom: 30px;">
+                    <li><i class="fas fa-check"></i> Biomechanismus des Pferdes</li>
+                    <li><i class="fas fa-check"></i> Hufgesundheit</li>
+                    <li><i class="fas fa-check"></i> Sehnen- und Sehnenerkrankungen</li>
+                    <li><i class="fas fa-check"></i> Taping</li>
+                    <li><i class="fas fa-check"></i> Grundlagen der Pferdeanalyse</li>
+                    <li><i class="fas fa-check"></i> Pferde-Akupressur & Massage</li>
+                </ul>
+                <div class="footer-info-box">
+                    <p>Trainings direkt vor Ort – stressfrei für Pferd und Besitzer.</p>
+                    <p>Das Equipment wird von mir mitgebracht; keine Vorkenntnisse nötig.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; text-align: center; font-size: 0.8rem; opacity: 0.6;">
+            © 2026 Connys Pferdewelt | Conny Blümert | Alle Rechte vorbehalten.
+        </div>
+    </footer>
+
+    <!-- LIGHTWEIGHT ANIMATION SCRIPT & MENU LOGIC -->
+    <script>
+        // 1. Reveal Animation
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // 2. Hamburger Menu Logic
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const links = document.querySelectorAll('.nav-links a');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
